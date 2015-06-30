@@ -1,0 +1,30 @@
+<div ng-controller = 'customersController as cc'>
+  <h2><u>Add a new customer</u></h2>
+    <div class = 'header'>
+        <form name = "myForm">
+          Name: <input type='text' ng-model='cc.newCustomer.name' required minlength="2" />
+          <div ng-bind="errors" style='color:red'></div>
+          <input type='submit' value='add new customer' ng-click='cc.addCustomer()'>
+        </form>
+      <label>Search Customers</label>
+      <input type="text" ng-model="cc.filter_name" placeholder = "search...">
+      <div class = "container">
+      <table class="table table-bordered">
+         <thead>
+           <tr>
+             <td>Customer Name</td>
+             <td>Created Date</td>
+             <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="customer in cc.customers | filter: cc.filter_name | orderBy:'created_at' ">
+              <td ng-bind= "customer.name"></td>
+              <td ng-bind= "customer.created_at"></td>
+              <td> <button type="button" class="btn btn-danger" ng-click="cc.removeCustomer(customer)" value="Remove">Remove</button></td>
+           </tr>
+          </tbody>
+      </table>
+      </div>
+  </div>
+</div>
